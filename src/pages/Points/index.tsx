@@ -49,16 +49,17 @@ const Points = () => {
     }, []);
 
     useEffect(() => {
-        api.get('points', {
+        
+        const params = {
             params: {
                 city: routeParams.city,
                 uf: routeParams.uf,
                 items: selectedItems
             }
-        }).then(response => {
-            setPoints(response.data)
-            console.log(points)
-        });
+        };
+
+        api.get('points', params).then(response => setPoints(response.data));
+
     }, [selectedItems]);
 
     useEffect(() => {
@@ -128,8 +129,8 @@ const Points = () => {
                                         style={ styles.mapMarker }
                                         onPress={ () => handleNavigateToDetail(point.id) }
                                         coordinate={{
-                                            latitude: point.latitude,
-                                            longitude: point.longitude
+                                            latitude: point.latitude && Number(point.latitude),
+                                            longitude: point.longitude && Number(point.longitude)
                                         }}
                                     >
                                         <View style={ styles.mapMarkerContainer }>

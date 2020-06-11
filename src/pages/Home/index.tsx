@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, Text, ImageBackground, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Feather as Icon } from '@expo/vector-icons';
@@ -9,6 +9,11 @@ const Home = () => {
 
   const [ uf, setUf ] = useState('');
   const [ city, setCity ] = useState('');
+
+  useEffect(() => {
+    setUf('SC');
+    setCity('Chapecó');
+  }, []);
 
   function handleNavigateToPoints() {
     navigation.navigate('Points', {uf, city});
