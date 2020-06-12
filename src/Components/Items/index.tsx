@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SvgUri } from 'react-native-svg';
 import api from '../../services/api';
+
+import ItemList from './ItemList';
 
 interface Item {
     id: number;
@@ -40,18 +40,7 @@ const Items: React.FC<Props> = ({ onSelectItem }) => {
         <View style={ styles.itemsContainer }>
             <ScrollView horizontal showsHorizontalScrollIndicator={ false } contentContainerStyle={{ paddingHorizontal: 20 }} >
                 {items.map(item => (
-                    <TouchableOpacity
-                        key={ String(item.id) }
-                        style={[ 
-                            styles.item, 
-                            selectedItems.includes(item.id) ? styles.selectedItem : {}
-                        ]}
-                        onPress={ () => { handleSelectItem(item.id) } }
-                        activeOpacity={ 0.5 }
-                    >
-                        <SvgUri width={ 42 } height={ 42 } uri={ item.image_url } />
-                        <Text style={ styles.itemTitle }>{ item.title }</Text>
-                    </TouchableOpacity> 
+                    <ItemList key={ String(item.id) } item={ item } onSelectItem={ handleSelectItem } />
                 ))}
             </ScrollView>
         </View>
@@ -64,34 +53,6 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       marginTop: 16,
       marginBottom: 32,
-    },
-  
-    item: {
-      backgroundColor: '#fff',
-      borderWidth: 2,
-      borderColor: '#eee',
-      height: 120,
-      width: 120,
-      borderRadius: 8,
-      paddingHorizontal: 16,
-      paddingTop: 20,
-      paddingBottom: 16,
-      marginRight: 8,
-      alignItems: 'center',
-      justifyContent: 'space-between',
-  
-      textAlign: 'center',
-    },
-  
-    selectedItem: {
-      borderColor: '#34CB79',
-      borderWidth: 2,
-    },
-  
-    itemTitle: {
-      fontFamily: 'Roboto_400Regular',
-      textAlign: 'center',
-      fontSize: 13,
     }
   });
 

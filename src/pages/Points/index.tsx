@@ -35,7 +35,10 @@ const Points = () => {
     const [ selectedItems, setSelectedItems ] = useState<number[]>([]);
 
     useEffect(() => {
-        
+        if (selectedItems.length === 0) {
+            setPoints([]);
+            return;
+        }
         const params = {
             params: {
                 city: routeParams.city,

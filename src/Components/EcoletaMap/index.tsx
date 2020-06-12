@@ -54,7 +54,7 @@ const EcoletaMap: React.FC<Props> = ({ points }) => {
                             }}
                         >
                             { points.length > 0 && points.map(point => (
-                                <EcoletaMapMarker key={ point.id } point={ point }/>
+                                <EcoletaMapMarker key={ String(point.id) } point={ point }/>
                             ))}
                         </MapView>
                     </View>
